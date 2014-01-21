@@ -1,0 +1,10 @@
+---
+- hosts: servers
+  sudo: yes
+  tasks:
+  - name: Upgrade OS
+    apt: update_cache=yes
+    apt: upgrade=dist
+    sudo: yes
+ - name: Reboot the server
+   command: reboot
