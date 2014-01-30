@@ -1,0 +1,6 @@
+---
+- hosts: test
+  sudo: yes
+  tasks:
+   - name: Copy pub key
+     authorized_key: user=level15 key="{{lookup('file','/home/level15/.ssh/id_rsa.epam.level15.pub')}}"

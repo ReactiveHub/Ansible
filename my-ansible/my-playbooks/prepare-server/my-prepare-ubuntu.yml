@@ -1,0 +1,30 @@
+---
+- hosts: servers
+  sudo: yes
+  tasks:
+  - name: Upgrade OS
+    apt: update_cache=yes
+    apt: upgrade=dist
+    sudo: yes
+  - name: Install necessary software
+    apt: pkg=wget state=present
+    apt: pkg=vim state=present
+    apt: pkg=perl state=present
+    apt: pkg=ntpdate state=present
+    apt: pkg=mlocate state=present
+    apt: pkg=fail2ban state=present
+  - name: Install banner EPAM
+    get_url: url=ftp://epbyminsd0094.minsk.epam.com/banner.epam dest=/etc/ssh/
+    copy: src=sshd_config dest=/etc/ssh/ force=yes owner=root group=root mode=0644 backup=yes 
+  - name: Set update time in cron
+    cron: name="Update time" minute="30" job="/usr/sbin/ntpdate -u 10.6.0.6" user="root"
+  - name: Add users
+    user: name=level15 comment="EPAM Cloud Support user" group="users" groups="wheel" shell="/bin/bash"
+    user: name=maintenance comment="Support DEV SRV MSQ user" group="users" groups="wheel" shell="/bin/bash"
+    user: name=level15 comment="User for security check" group="users" groups="wheel" shell="/bin/bash"
+  - name: Change DHCP settings
+    copy: src=dhclient.conf dest=/etc/dhcp/dhclient.conf force=yes owner=root group=root mode=644 backup=yes
+    copy: src=hostname dest=/etc/hostname force=yes owner=root group=root mode=644 backup=yes 
+  - name: Reboot the server
+    command: reboot
+
