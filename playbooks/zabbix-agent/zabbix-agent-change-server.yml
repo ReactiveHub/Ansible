@@ -1,0 +1,8 @@
+---
+- hosts: logs
+  sudo: yes
+  tasks:
+  - name: Change hostname to EVBYMINSD4521
+    lineinfile: dest=/etc/zabbix/zabbix_agentd.conf regexp='^Server=EVBYMINSD' line='Server=EVBYMINSD4521'
+  - name: Restart zabbix agent
+    service: name=zabbix-agent state=restarted
