@@ -1,6 +1,0 @@
----
-- hosts: servers
-  sudo: yes
-  tasks:
-   - service: name=zabbix-agent state=started
-     sudo: yes  
