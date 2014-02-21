@@ -1,6 +1,0 @@
----
-- name: set up a monitoring
-  hosts: stage
-
-  roles: #Folder
-	- stage
