@@ -1,0 +1,16 @@
+---
+- name: Ensure that git is installed
+  apt: pkg=git state=present
+
+- name: Create a directory for git
+  file: path=/opt/git owner=leve15 group=users
+
+- name: Checkout  ReactiveHub
+  git: repo=git://github.com/ReactiveHub/Ansible.git
+       dest=/opt/git
+
+- name: Setup cron for hourly update
+  cron: name="Hourly update ReactiveHub"
+        user="level15"
+        hours="0-23"
+        job="cd /opt/git/Ansible && git pull git://github.com/ReactiveHub/Ansible.git"

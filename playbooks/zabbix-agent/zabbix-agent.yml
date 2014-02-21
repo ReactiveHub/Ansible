@@ -4,6 +4,7 @@
    hosts: "Please enter hosts group name"
   hosts: $hosts
   sudo: yes
+
   tasks:
   - name: Update cache
     apt: update_cache=yes

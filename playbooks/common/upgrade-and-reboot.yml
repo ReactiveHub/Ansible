@@ -1,6 +1,12 @@
 ---
-- hosts: logs
+- name: Upgrade server
+
+  vars_prompt:
+    hosts: "Please enter hosts group name"
+
+  hosts: $hosts 
   sudo: yes
+
   tasks:
   - name: Upgrade OS
     apt: update_cache=yes
