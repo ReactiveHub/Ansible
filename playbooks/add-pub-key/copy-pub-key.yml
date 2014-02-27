@@ -1,10 +1,11 @@
 ---
 - name: Copy pub key
 
-  vars_prompt:
-   hosts: "Please enter hosts group name"
+#  vars_prompt:
+#   hosts: "Please enter hosts group name"
 
-  hosts: $hosts
+#  hosts: $hosts
+  hosts: all
   sudo: yes
 
   tasks:

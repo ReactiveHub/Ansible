@@ -1,0 +1,9 @@
+---
+- name: Test Ansible pulll
+
+  hosts: all
+  sudo: yes
+
+  tasks:
+  - name: Install sysv-rc-conf
+    apt: pkg=sysv-rc-conf state=present
